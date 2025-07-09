@@ -1,0 +1,349 @@
+---
+format:
+  pdf:
+    toc: false
+    number-sections: false
+    colorlinks: true
+    documentclass: scrartcl
+    papersize: letter
+    pdf-engine: xelatex
+    fontsize: 8pt
+    geometry:
+      - margin=0.5in
+      - heightrounded
+      - includefoot
+      - footskip=0.5in
+    include-in-header:
+      - preamble.tex
+execute:
+  warning: false
+  echo: false
+  message: false
+  eval: true
+jupyter: python3
+---
+
+```{python}
+#| name: setup
+#| include: false
+#| message: false
+#| eval: true
+
+import sys
+sys.path.append('.')
+
+from functions import (
+    get_cv_sheet, gscholar_stats, make_bullet_list_filtered, 
+    make_ordered_list_filtered, enquote, markdown_url, na_to_space
+)
+import pandas as pd
+from datetime import datetime
+
+# Store IDs
+gscholar_id = "iNdNU5QAAAAJ"
+gscholar_page = f"https://scholar.google.com/citations?user={gscholar_id}"
+
+# Get Google Scholar statistics
+try:
+    text_gs = gscholar_stats(url=gscholar_page)
+except Exception as e:
+    print(f"Warning: Could not retrieve Google Scholar stats: {e}")
+    text_gs = "Citations: N/A | h-index: N/A | i10-index: N/A"
+```
+
+\begin{center}
+\huge{\underline{\textbf{Darwin Del Castillo, MD, MPH}}} \\
+\vspace{2.5pt}
+\faLinkedin \href{https://www.linkedin.com/in/darwin-del-castillo/}{\hspace{0.5em}darwin-del-castillo} | \faEnvelope \href{mailto:ddelcastillo.f@gmail.com}{\hspace{0.5em}ddelcastillo.f@gmail.com} | \faGithub \href{https://github.com/ddelcastillof}{\hspace{0.5em}ddelcastillof} 
+\vspace{-2.5pt}
+\end{center}
+
+```{python}
+#| name: brief_bio
+#| eval: false
+#| include: false
+#| echo: false
+
+# This section is commented out in the original
+print(r"""
+\section{\underline{Summary}}
+\justifying{Medical doctor and global health scientist with extensive experience bridging the gap between epidemiological methods and healthcare data science. I am committed to transforming early-life health outcomes through innovative research and data-driven solutions. I have collaborated with a diversity of global health institutions and managing research teams that translates data findings into actionable public health information.}
+""")
+```
+\section{Scientific Education}
+\vspace{-1.5em}
+\textcolor{darkgray}{\rule{\textwidth}{0.5pt}}
+\begin{longtable}{p{14cm}>{\raggedleft\arraybackslash}p{4cm}}
+
+\textbf{Master of Public Health (MPH)} & \textbf{Sep 2023 – Jun 2025} \\
+\textbf{University of Washington, Seattle - USA} & \\
+
+&\\
+
+\textbf{Medical Doctor (MD)} & \textbf{Mar 2013 – Dec 2020} \\
+\textbf{Universidad Nacional Mayor de San Marcos, Lima - Peru} &\\
+\end{longtable}
+
+\section{Skills}
+\vspace{-1.5em}
+\textcolor{darkgray}{\rule{\textwidth}{0.5pt}}
+
+\begin{minipage}[c]{0.65\textwidth}
+Health data science and epidemiology: data wrangling, querying, analysis, visualization \& management
+\vspace{1pt}
+\begin{itemize}
+\item SQL (MySQL), Python, R programming
+\item HPC (Slurm), Linux environments (bash)
+\item VS Code, Jupyter Lab, Quarto, Markdown, \LaTeX, Shiny (R), GIS tools
+\item Team-based projects on Github and Bitbucket repositories
+\item Packages: tidyverse, ggplot2, meta/metafor, lme4, survival, geepack, gam, lavaan, sf, rJAGS, rstan, Pandas, Matplotlib, NumPy, MR-BRT (GBD Study estimation), amongst other tools.
+\end{itemize}
+\end{minipage}
+\begin{minipage}[c]{0.35\textwidth}
+\begin{itemize}
+\item Fluency in English \& Spanish
+\item Team work \& collaboration
+\item Problem solving
+\item Science communication
+\item Mentorship
+\end{itemize}
+\end{minipage}
+
+\section{Professional Experience}
+\vspace{-1.5em}
+\textcolor{darkgray}{\rule{\textwidth}{0.5pt}}
+
+\begin{longtable}{p{14cm}>{\raggedleft\arraybackslash}p{4cm}}
+
+\textbf{Graduate Research Assistant} & \textbf{Jul 2024 – Jun 2025} \\
+\multicolumn{2}{p{18cm}}{\textbf{Institute for Health Metrics and Evaluation}} \\
+\multicolumn{2}{p{18cm}}{\textbf{University of Washington, Seattle (USA)}} \\
+\multicolumn{2}{p{18cm}}{%
+\begin{itemize}
+\item Modeling epidemiological data of lower respiratory tract infections due to human metapneumovirus from 2010 to 2023 using meta-analysis information in R and Bayesian meta-regression suites (DisMod-MR).
+\item Analyzed data from public sources using Bayesian methods and Monte Carlo simulation to estimate the overlap proportion between socially excluded groups in high-income countries using the packages rJAGS and rstan.
+\item Improved analytic scripts for electronic health records data extraction, cleaning, and analysis by developing Python functions that reduced processing time in high-performance computing contexts.
+\end{itemize}
+} \\
+\\
+\textbf{Graduate Research Assistant} & \textbf{Jun 2024 – Mar 2025} \\
+\multicolumn{2}{p{18cm}}{\textbf{Department of Global Health}} \\
+\multicolumn{2}{p{18cm}}{\textbf{University of Washington, Seattle (USA)}} \\
+\multicolumn{2}{p{18cm}}{%
+\begin{itemize} 
+\item Synthesized clinical and research evidence into a scoping review to support the creation of indicators to guide mental health policy.
+\item Designed a mixed-method study protocol to assess the effectiveness of implementation strategies for pediatric burn care in a Peruvian healthcare setting.
+\item Crafted communication strategies with stakeholders to inform results from the mixed-methods study.
+\end{itemize}
+} \\
+\\
+\textbf{Graduate Research Assistant}  & \textbf{Sep 2023 – Mar 2024} \\
+\multicolumn{2}{p{18cm}}{\textbf{Health Population Research Center}} \\
+\multicolumn{2}{p{18cm}}{\textbf{University of Washington, Seattle (USA)}} \\
+\multicolumn{2}{p{18cm}}{%
+\begin{itemize} 
+\item Gathered sociodemographic and utlization data as part of a clinical trial post-assesment survey.
+\item Translated IRB submission materials from Spanish to English for the Alzheimer’s Disease Research Center.
+\item Synthesized early engagement and outreach data into visualisation tools and summary tables, enabling program managers to make adjustments to recruitment strategies.
+\end{itemize}
+} \\
+\\
+\textbf{RWE Consultant} & \textbf{Jan 2023 – Jan 2024} \\
+\multicolumn{2}{p{18cm}}{\textbf{Health Technology Assessment and Research Institute}} \\
+\multicolumn{2}{p{18cm}}{\textbf{Social Security Health System, Lima (Peru)}} \\
+\multicolumn{2}{p{18cm}}{%
+\begin{itemize}
+\item Structured and consolidated multi-source health data (surveillance data, clinical studies) to generate data for health technology assessments.
+\item Conducted budget impact and cost-effectiveness assessments to prioritize funding for high-impact health interventions under national budgets.
+\item Presented data-driven recommendations and evidence summaries to policymakers and partners, supporting strategic purchasing decisions for the Social Security System.
+\end{itemize}
+} \\
+\newpage
+
+\textbf{Research Assistant} & \textbf{Mar 2019 – Aug 2023}\\
+\multicolumn{2}{p{18cm}}{\textbf{CRONICAS Center of Excellence in Chronic Diseases}} \\
+\multicolumn{2}{p{18cm}}{\textbf{Universidad Peruana Cayetano Heredia, Lima (Peru)}} \\
+\multicolumn{2}{p{18cm}}{%
+\begin{itemize}
+\item Led workshops and focus groups with participants and community healthworkers across four regions to co-design patient-centered interventions.
+\item Conducted real-world evidence synthesis and preliminary data analyses to support grant proposals for hypertension, diabetes, cancer, and multimorbidity studies.
+\item Co-authored peer-reviewed manuscripts as part of international collaborations, communicating complex analytical findings for academic and lay audiences.
+\end{itemize}
+} \\
+\end{longtable}
+
+\section{Additional Education}
+\vspace{-1.5em}
+\textcolor{darkgray}{\rule{\textwidth}{0.5pt}}
+
+\begin{longtable}{p{14cm}>{\raggedleft\arraybackslash}p{4cm}}
+\textbf{Professional Certificate in Clinical Research} & \textbf{Sep 2021 – Apr 2022} \\
+\textbf{Universidad Peruana Cayetano Heredia, Lima - Peru} &\\
+\end{longtable}
+
+```{python}
+#| name: teaching
+#| eval: false
+#| include: false
+#| echo: false
+
+# Teaching section - commented out in original
+print(r"""
+\section{\underline{Teaching Experience}}
+\subsection{Courses taught at the college level}
+\subsubsection{Courses taught at Universidad Nacional Mayor de San Marcos}
+""")
+
+try:
+    classes_df = get_cv_sheet('classes')
+    unmsm_classes = classes_df[classes_df['univ'] == 'UNMSM'].copy()
+    unmsm_classes['course'] = unmsm_classes['number'].astype(str) + ': ' + unmsm_classes['name']
+    unmsm_classes['role'] = unmsm_classes['type']
+    unmsm_classes['semester'] = unmsm_classes['semester'].apply(lambda x: 'Aut20' if x == 'Aut20' else x)
+    
+    # Create table (would need additional formatting for LaTeX)
+    table_data = unmsm_classes[['semester', 'course', 'role', 'level']].rename(columns={
+        'semester': 'Sem.', 'course': 'Course', 'role': 'Role', 'level': 'Level'
+    })
+    
+    print("UNMSM Classes table would go here")
+    
+except Exception as e:
+    print(f"Could not retrieve teaching data: {e}")
+
+print(r"""
+\subsubsection{Courses taught at University of Washington}
+""")
+
+try:
+    uw_classes = classes_df[classes_df['univ'] == 'UW'].copy()
+    uw_classes['course'] = uw_classes['number'].astype(str) + ': ' + uw_classes['name']
+    uw_classes['role'] = uw_classes['type']
+    uw_classes['semester'] = uw_classes['semester'].apply(lambda x: 'Spr24' if x == 'Spr24' else x)
+    
+    print("UW Classes table would go here")
+    
+except Exception as e:
+    print(f"Could not retrieve UW teaching data: {e}")
+
+print(r"""
+\subsection{Other teaching experience}
+""")
+
+try:
+    teaching = get_cv_sheet('teaching')
+    teaching = teaching.sort_values('date', ascending=False)
+    teaching['with'] = teaching['with'].apply(lambda x: '' if pd.isna(x) else f', with {x}')
+    teaching['title'] = teaching['title'].apply(enquote) + teaching['with']
+    teaching['date'] = pd.to_datetime(teaching['date']).dt.strftime('%b %d, %Y') + '.'
+    teaching['url'] = teaching['url'].apply(lambda x: '' if pd.isna(x) else markdown_url(x))
+    teaching['date'] = teaching.apply(lambda row: row['date'] if pd.isna(row['url']) or row['url'] == '' 
+                                     else f"{row['date']} {row['url']}", axis=1)
+    teaching['citation'] = (teaching['title'] + '. ' + teaching['host'] + '. ' + 
+                           teaching['location'] + '. ' + teaching['date'])
+    
+    print(r"""
+\subsubsection{Seminars}
+""")
+    
+    seminar_list = make_ordered_list_filtered(teaching, "seminar")
+    print(seminar_list)
+    
+except Exception as e:
+    print(f"Could not retrieve other teaching data: {e}")
+
+print(r"""
+\section{\underline{Advising}}
+""")
+```
+
+```{python}
+#| name: mentees
+#| include: false
+#| eval: false
+#| echo: false
+
+print(r"""
+\subsection{Mentoring}
+\subsubsection{Undergraduate thesis}
+""")
+
+mentees = get_cv_sheet('advising')
+mentees = mentees.sort_values('date_start')
+mentees['date'] = ' (' + mentees['date_start'].astype(str) + ' to ' + mentees['date_stop'].astype(str) + ').'
+mentees['citation'] = mentees.apply(
+    lambda row: row['name'] if pd.isna(row['title']) else f"{row['name']}, {enquote(row['title'])}", 
+    axis=1
+)
+mentees['citation'] = mentees['citation'] + ', ' + mentees['institution'] + ' ' + mentees['date']
+mentees['citation'] = mentees.apply(
+    lambda row: row['citation'] if pd.isna(row['defense_date']) 
+    else f"{row['citation']} _Defense date: {row['defense_date']}_.", 
+    axis=1
+)
+```
+
+```{python}
+#| name: mentees_table
+#| results: asis
+#| include: false
+#| eval: false
+#| echo: false
+incomplete_mentees = mentees[mentees['complete'] == 0]
+ug_mentees = incomplete_mentees[incomplete_mentees['category'] == 'ug']
+if len(ug_mentees) > 0:
+    mentee_list = make_ordered_list_filtered(ug_mentees, "ug")
+    print(mentee_list)
+else:
+    print("No current undergraduate mentees.")
+```
+
+\section{Other Professional Activities}
+\vspace{-1.5em}
+\textcolor{darkgray}{\rule{\textwidth}{0.5pt}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{4cm} p{14cm}}
+\textbf{Jan 2025 – current} & \textbf{Lecturer: Introduction to Epidemiology.} Universidad Científica del Sur. I teach three sections of \textasciitilde 15 fourth-year medical students each, focusing on basic clinical epidemiology concepts, including study designs, bias identification, \& basic epidemiological surveillance concepts. \\
+\textbf{Mar 2024 – Jun 2024} & \textbf{Teaching Assistant: Introduction to Molecular and Cellular Biology.} University of Washington. Led two laboratory practice sessions with \textasciitilde 25 undergraduate students each, covering fundamental molecular and cellular biology experiments. \\
+\end{longtable}
+
+\section{Publications \hspace{1cm} ORCID: 0000-0002-8609-0312}
+\vspace{-1.5em}
+\textcolor{darkgray}{\rule{\textwidth}{0.5pt}}
+```{python}
+#| name: importing_pubs
+#| include: false
+#| eval: true
+#| echo: false
+
+pubs = get_cv_sheet('pubs')
+pubs['journal'] = pubs['journal_abbv'].fillna('')
+pubs['number'] = pubs['number'].fillna('').astype(str)
+pubs['number'] = pubs['number'].apply(lambda x: f"{x}." if x and x != 'nan' else '')
+pubs['doi'] = pubs['doi'].apply(
+    lambda x: '' if pd.isna(x) else r'\href{https://doi.org/' + x + '}{' + x + '}'
+)
+pubs['year'] = pubs['year'].apply(lambda x: f'({int(x)})' if pd.notna(x) else '(Year Unknown)')
+pubs['title'] = pubs['title'].apply(enquote)
+pubs['citation'] = (pubs['author'] + ' ' + pubs['year'] + ' ' + 
+                   pubs['title'] + ' ' + pubs['journal'] + ' ' + 
+                   pubs['number'] + ' ' + pubs['doi'])
+pubs = pubs.sort_values('pub_date', ascending=False)
+```
+
+\subsection{Peer-reviewed publications}
+```{python}
+#| name: peer_reviewed_pubs
+from IPython.display import Latex, display
+
+peer_reviewed = make_bullet_list_filtered(pubs, "peer_reviewed")
+display(Latex(peer_reviewed))
+```
+
+\subsection{Conference abstracts}
+```{python}
+#| name: conference_abstracts
+from IPython.display import Latex, display
+
+conference_abstracts = make_bullet_list_filtered(pubs, "conference")
+display(Latex(conference_abstracts))
+```
