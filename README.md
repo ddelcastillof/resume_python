@@ -1,6 +1,6 @@
 # Professional CV
 
-This is a Python version of the original CV-resume. The CV dynamically pulls data from Google Sheets and includes automated citation scraping from Google Scholar.
+This is a Python version of the original CV/resume (ddelcastillof/cv-professional). The CV dynamically pulls data from Google Sheets and includes automated citation scraping from Google Scholar.
 
 ## Key Architecture
 
