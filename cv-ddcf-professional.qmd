@@ -58,18 +58,6 @@ except Exception as e:
 \vspace{-2.5pt}
 \end{center}
 
-```{python}
-#| name: brief_bio
-#| eval: false
-#| include: false
-#| echo: false
-
-# This section is commented out in the original
-print(r"""
-\section{\underline{Summary}}
-\justifying{Medical doctor and global health scientist with extensive experience bridging the gap between epidemiological methods and healthcare data science. I am committed to transforming early-life health outcomes through innovative research and data-driven solutions. I have collaborated with a diversity of global health institutions and managing research teams that translates data findings into actionable public health information.}
-""")
-```
 \section{Scientific Education}
 \vspace{-1.5em}
 \textcolor{darkgray}{\rule{\textwidth}{0.5pt}}
@@ -182,91 +170,10 @@ Health data science and epidemiology: data wrangling, querying, analysis, visual
 \end{longtable}
 
 ```{python}
-#| name: teaching
-#| eval: false
-#| include: false
-#| echo: false
-
-# Teaching section - commented out in original
-print(r"""
-\section{\underline{Teaching Experience}}
-\subsection{Courses taught at the college level}
-\subsubsection{Courses taught at Universidad Nacional Mayor de San Marcos}
-""")
-
-try:
-    classes_df = get_cv_sheet('classes')
-    unmsm_classes = classes_df[classes_df['univ'] == 'UNMSM'].copy()
-    unmsm_classes['course'] = unmsm_classes['number'].astype(str) + ': ' + unmsm_classes['name']
-    unmsm_classes['role'] = unmsm_classes['type']
-    unmsm_classes['semester'] = unmsm_classes['semester'].apply(lambda x: 'Aut20' if x == 'Aut20' else x)
-    
-    # Create table (would need additional formatting for LaTeX)
-    table_data = unmsm_classes[['semester', 'course', 'role', 'level']].rename(columns={
-        'semester': 'Sem.', 'course': 'Course', 'role': 'Role', 'level': 'Level'
-    })
-    
-    print("UNMSM Classes table would go here")
-    
-except Exception as e:
-    print(f"Could not retrieve teaching data: {e}")
-
-print(r"""
-\subsubsection{Courses taught at University of Washington}
-""")
-
-try:
-    uw_classes = classes_df[classes_df['univ'] == 'UW'].copy()
-    uw_classes['course'] = uw_classes['number'].astype(str) + ': ' + uw_classes['name']
-    uw_classes['role'] = uw_classes['type']
-    uw_classes['semester'] = uw_classes['semester'].apply(lambda x: 'Spr24' if x == 'Spr24' else x)
-    
-    print("UW Classes table would go here")
-    
-except Exception as e:
-    print(f"Could not retrieve UW teaching data: {e}")
-
-print(r"""
-\subsection{Other teaching experience}
-""")
-
-try:
-    teaching = get_cv_sheet('teaching')
-    teaching = teaching.sort_values('date', ascending=False)
-    teaching['with'] = teaching['with'].apply(lambda x: '' if pd.isna(x) else f', with {x}')
-    teaching['title'] = teaching['title'].apply(enquote) + teaching['with']
-    teaching['date'] = pd.to_datetime(teaching['date']).dt.strftime('%b %d, %Y') + '.'
-    teaching['url'] = teaching['url'].apply(lambda x: '' if pd.isna(x) else markdown_url(x))
-    teaching['date'] = teaching.apply(lambda row: row['date'] if pd.isna(row['url']) or row['url'] == '' 
-                                     else f"{row['date']} {row['url']}", axis=1)
-    teaching['citation'] = (teaching['title'] + '. ' + teaching['host'] + '. ' + 
-                           teaching['location'] + '. ' + teaching['date'])
-    
-    print(r"""
-\subsubsection{Seminars}
-""")
-    
-    seminar_list = make_ordered_list_filtered(teaching, "seminar")
-    print(seminar_list)
-    
-except Exception as e:
-    print(f"Could not retrieve other teaching data: {e}")
-
-print(r"""
-\section{\underline{Advising}}
-""")
-```
-
-```{python}
 #| name: mentees
 #| include: false
 #| eval: false
 #| echo: false
-
-print(r"""
-\subsection{Mentoring}
-\subsubsection{Undergraduate thesis}
-""")
 
 mentees = get_cv_sheet('advising')
 mentees = mentees.sort_values('date_start')
