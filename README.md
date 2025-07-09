@@ -79,7 +79,7 @@ This Python version maintains the same functionality as the original R/Quarto ve
 
 ## Google Sheets Setup
 
-For public access (equivalent to `gs4_deauth()` in R), the current setup assumes public read access to the Google Sheet. For authenticated access, you'll need to:
+The current setup assumes public read access to the Google Sheet, which is the case with the current CV spreadsheet. For authenticated access, you'll need to:
 
 1. Create a Google Cloud Project
 2. Enable the Google Sheets API
