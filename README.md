@@ -1,10 +1,10 @@
-# Professional CV Generator (Python Version)
+# Professional CV
 
-This is a Python translation of the original R/Quarto-based CV generator. The CV dynamically pulls data from Google Sheets and includes automated citation scraping from Google Scholar.
+This is a Python version of the original CV-resume. The CV dynamically pulls data from Google Sheets and includes automated citation scraping from Google Scholar.
 
 ## Key Architecture
 
-- **cv_generator.py**: Main CV generation script that creates LaTeX output
+- **cv-ddcf-professional.qmd**: Main CV generation script that creates LaTeX output
 - **functions.py**: Core utility functions for data processing, Google Sheets integration, and text formatting
 - **cite_scrape.py**: Script for scraping Google Scholar citation data
 - **preamble.tex**: LaTeX configuration for PDF styling and formatting (from original)
@@ -27,13 +27,15 @@ You'll also need:
 ### Generate LaTeX CV
 
 ```bash
-python cv_generator.py
+quarto render cv-ddcf-professional.qmd --to pdf
 ```
 
-This will generate `cv-ddcf-professional.tex` which can be compiled to PDF using:
+This will generate `cv-ddcf-professional.pdf`
+
+Alternatively, you can use
 
 ```bash
-xelatex cv-ddcf-professional.tex
+quarto preview cv-ddcf-professional.qmd
 ```
 
 ### Citation Scraping
